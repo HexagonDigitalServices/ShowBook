@@ -29,31 +29,6 @@ const Hero = ({ searchQuery }) => {
                     infoLink: item.volumeInfo.infoLink || '#',
                 })) || [];
 
-                let limitedBooks = mappedBooks.slice(0, 35);
-                if (limitedBooks.length < 35) {
-                    const missingCount = 35 - limitedBooks.length;
-                    const dummyBooks = Array.from({ length: missingCount }, (_, i) => ({
-                        dummy: true,
-                        id: `dummy-${i}`
-                    }));
-                    limitedBooks = [...limitedBooks, ...dummyBooks];
-                }
-                setBooks(limitedBooks);
-            } catch (error) {
-                console.error('Error fetching books:', error);
-                const dummyBooks = Array.from({ length: 35 }, (_, i) => ({
-                    dummy: true,
-                    id: `dummy-${i}`
-                }));
-                setBooks(dummyBooks);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchBooks();
-    }, [searchQuery]);
-
 
     const getPlaceholder = (title) => {
         return `data:image/svg+xml;utf8,${encodeURIComponent(
